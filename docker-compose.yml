@@ -1,32 +1,6 @@
-# This is a Docker Compose file for setting up an Elasticsearch and Kibana stack.
-# It uses the official images from Docker Hub and configures them to run in a single-node mode.
+version: "3.8"
+
 services:
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.4
-    container_name: elasticsearch
-    environment:
-      - discovery.type=single-node
-      - xpack.security.enabled=false
-      - ES_JAVA_OPTS=-Xms512m -Xmx512m
-    ports:
-      - "9200:9200"
-    volumes:
-      - esdata:/usr/share/elasticsearch/data
-    networks:
-      - elastic-net
-
-  kibana:
-    image: docker.elastic.co/kibana/kibana:8.7.0
-    depends_on:
-      - elasticsearch
-    environment:
-      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-      - XPACK_SECURITY_ENABLED=false
-    ports:
-      - "5601:5601"
-    networks:
-      - elastic-net
-
   zookeeper:
     image: bitnami/zookeeper:3.8
     container_name: zookeeper
@@ -41,14 +15,15 @@ services:
     environment:
       - KAFKA_BROKER_ID=1
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
-      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT
-      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
-      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+      - KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      
       - ALLOW_PLAINTEXT_LISTENER=yes
     ports:
       - "9092:9092"
+      - "29092:29092"
     depends_on:
-      - zookeeper    
+      - zookeeper
 
   kafdrop:
     image: obsidiandynamics/kafdrop
@@ -58,10 +33,14 @@ services:
     environment:
       - KAFKA_BROKERCONNECT=kafka:9092
     depends_on:
-      - kafka        
+      - kafka
 
-volumes:
-  esdata:
-
-networks:
-  elastic-net:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.4
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+      - "9300:9300"

@@ -23,7 +23,7 @@ namespace N5.Permissions.API
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console()
                 .WriteTo.File(Path.Combine("C:", "N5PermissionsSolution", "logs", "permissionsapi.log"), rollingInterval: RollingInterval.Day)
-                .WriteTo.Elasticsearch(new[] { new Uri("http://localhost:9200") }, opts =>
+                .WriteTo.Elasticsearch(new[] { new Uri("http://localhost:9200/") }, opts =>
                 {
                     opts.DataStream = new DataStreamName("logs", "console-example", "demo");
                     opts.BootstrapMethod = BootstrapMethod.Failure;

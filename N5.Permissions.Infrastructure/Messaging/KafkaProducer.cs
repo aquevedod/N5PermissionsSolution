@@ -18,11 +18,20 @@ namespace N5.Permissions.Infrastructure.Messaging
 
         public async Task ProduceAsync(PermissionEvent permissionEvent, CancellationToken cancellationToken)
         {
-            var json = JsonSerializer.Serialize(permissionEvent);
+            try
+            {
+				var json = JsonSerializer.Serialize(permissionEvent);
 
-            var message = new Message<Null, string> { Value = json };
+				var message = new Message<Null, string> { Value = json };
 
-            var result = await _producer.ProduceAsync(Topic, message, cancellationToken);
+                var result = await _producer.ProduceAsync(Topic, message);
+											//.WaitAsync(TimeSpan.FromSeconds(10));
+
+			}
+			catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
