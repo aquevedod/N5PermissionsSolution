@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N5.Permissions.API", "N5.Permission.API\N5.Permissions.API.csproj", "{A42DF423-3E15-4C21-812E-05B829E5EE98}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N5.Permissions.Domain", "N5.Permissions.Domain\N5.Permissions.Domain.csproj", "{5D29A4FC-1A94-454E-9326-833037E7C425}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N5.Permissions.Infrastructure", "N5.Permissions.Infrastructure\N5.Permissions.Infrastructure.csproj", "{B45A8DFA-AF74-4A3E-A7D3-0C0019A87E0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N5.Permissions.Test", "N5.Permissions.Test\N5.Permissions.Test.csproj", "{DCF23F38-306C-4FBE-9962-CA054C0C80EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B45A8DFA-AF74-4A3E-A7D3-0C0019A87E0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B45A8DFA-AF74-4A3E-A7D3-0C0019A87E0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B45A8DFA-AF74-4A3E-A7D3-0C0019A87E0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCF23F38-306C-4FBE-9962-CA054C0C80EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCF23F38-306C-4FBE-9962-CA054C0C80EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCF23F38-306C-4FBE-9962-CA054C0C80EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCF23F38-306C-4FBE-9962-CA054C0C80EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

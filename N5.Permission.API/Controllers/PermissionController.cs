@@ -26,7 +26,7 @@ namespace N5.Permissions.API.Controllers
 
         // POST api/<PermissionController>
         [HttpPost]
-        public async Task<IActionResult> RequestPermission([FromBody] RequestPermissionCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> RequestPermission([FromBody] RequestPermissionCommand command, CancellationToken cancellationToken = default)
         {
             try
             {

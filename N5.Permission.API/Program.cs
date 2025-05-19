@@ -49,7 +49,7 @@ namespace N5.Permissions.API
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-            builder.Services.AddMediatR(typeof(RequestPermissionHandler).Assembly);
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(RequestPermissionHandler).Assembly));
             builder.Services.AddInfrastructure(builder.Configuration);
 
 

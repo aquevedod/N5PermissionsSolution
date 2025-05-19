@@ -24,7 +24,7 @@ namespace N5.Permissions.Infrastructure
             var client = new ElasticClient(settings);
             services.AddSingleton<IElasticClient>(client);
             services.AddSingleton<IKafkaProducer>(sp =>
-                new KafkaProducer("localhost:9092"));
+                new KafkaProducer("localhost:29092"));
 
             services.AddScoped<IPermissionIndexer, PermissionIndexer>();
 

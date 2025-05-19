@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using N5.Permissions.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace N5.Permissions.Infrastructure.Persistence
         }
         public DbSet<Permission> Permissions => Set<Permission>();
         public DbSet<PermissionType> PermissionTypes => Set<PermissionType>();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Permission>()

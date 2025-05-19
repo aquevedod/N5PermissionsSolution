@@ -1,21 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using N5.Permissions.Infrastructure.Persistence;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace N5.Permissions.Infrastructure
+namespace N5.Permissions.Infrastructure.Persistence
 {
-	public class PermissionsDbContextFactory : IDesignTimeDbContextFactory<PermissionsDbContext>
-	{
-		public PermissionsDbContext CreateDbContext(string[] args)
-		{
-			var optionsBuilder = new DbContextOptionsBuilder<PermissionsDbContext>();
+    public class PermissionsDbContextFactory : IDesignTimeDbContextFactory<PermissionsDbContext>
+    {
+        public PermissionsDbContext CreateDbContext(string[] args)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<PermissionsDbContext>();
+            var connectionString = "Server=localhost\\SQLEXPRESS;Database=N5.Test;User Id=sa;Password=123456;Encrypt=True;TrustServerCertificate=True;";
 
-			// ⚠️ Reemplazá esto por tu cadena de conexión real o temporal
-			var connectionString = "Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;TrustServerCertificate=True";
+            optionsBuilder.UseSqlServer(connectionString);
 
-			optionsBuilder.UseSqlServer(connectionString);
-
-			return new PermissionsDbContext(optionsBuilder.Options);
-		}
-	}
+            return new PermissionsDbContext(optionsBuilder.Options);
+        }
+    }
 }
