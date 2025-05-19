@@ -43,3 +43,23 @@ services:
     ports:
       - "9200:9200"
       - "9300:9300"
+
+  permissionapi:
+    build:
+      context: .
+      dockerfile: N5.Permission.API/Dockerfile
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=localhost\\SQLEXPRESS;Database=N5.Test;User Id=sa;Password=Clave.1234!;Encrypt=True;TrustServerCertificate=True;
+    volumes:
+      - ./logs:/app/logs
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    depends_on:
+      - kafka
+      - elasticsearch

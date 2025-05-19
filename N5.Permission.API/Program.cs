@@ -20,21 +20,25 @@ namespace N5.Permissions.API
     {
         public static void Main(string[] args)
         {
-            Log.Logger = new LoggerConfiguration()
-                .WriteTo.Console()
-                .WriteTo.File(Path.Combine("C:", "N5PermissionsSolution", "logs", "permissionsapi.log"), rollingInterval: RollingInterval.Day)
-                .WriteTo.Elasticsearch(new[] { new Uri("http://localhost:9200/") }, opts =>
-                {
-                    opts.DataStream = new DataStreamName("logs", "console-example", "demo");
-                    opts.BootstrapMethod = BootstrapMethod.Failure;
-                }, transport =>
-                {
-                    // transport.Authentication(new BasicAuthentication(username, password));
-                    // transport.Authentication(new ApiKey(base64EncodedApiKey));
-                })
-                .Enrich.FromLogContext()
-                .CreateLogger();
 
+            try
+            {
+                Log.Logger = new LoggerConfiguration()
+                    .WriteTo.Console()
+                    .WriteTo.File(Path.Combine("/app/logs", "permissionsapi.log"), rollingInterval: RollingInterval.Day)
+                    .WriteTo.Elasticsearch([new Uri("http://elasticsearch:9200/")], opts =>
+                    {
+                        opts.DataStream = new DataStreamName("logs", "console-example", "demo");
+                        opts.BootstrapMethod = BootstrapMethod.Failure;
+                    })
+                    .Enrich.FromLogContext()
+                    .CreateLogger();
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error initializing Serilog");
+            }
 
 
             var builder = WebApplication.CreateBuilder(args);
@@ -71,7 +75,6 @@ namespace N5.Permissions.API
                 catch (Exception ex)
                 {
                     Log.Fatal(ex, "Error al conectar con Elasticsearch");
-                    throw;
                 }
             }
 

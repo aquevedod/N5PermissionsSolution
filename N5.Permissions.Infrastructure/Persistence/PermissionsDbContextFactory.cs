@@ -13,7 +13,7 @@ namespace N5.Permissions.Infrastructure.Persistence
         public PermissionsDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<PermissionsDbContext>();
-            var connectionString = "Server=localhost\\SQLEXPRESS;Database=N5.Test;User Id=sa;Password=123456;Encrypt=True;TrustServerCertificate=True;";
+            var connectionString = "Server=localhost\\SQLEXPRESS;Database=N5.Test;User Id=sa;Password=Clave.1234!;Encrypt=True;TrustServerCertificate=True;";
 
             optionsBuilder.UseSqlServer(connectionString);
 
